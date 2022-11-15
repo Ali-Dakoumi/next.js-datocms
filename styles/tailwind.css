@@ -1,0 +1,40 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+
+@tailwind utilities;
+
+.content a {
+  @apply text-pink-600;
+  @apply underline;
+}
+
+.content a:hover {
+  @apply no-underline;
+}
+
+.post-enter {
+  max-height: 0;
+  opacity: 0;
+  scale: 0.5;
+}
+
+.post-enter-active {
+  scale: 1;
+  max-height: 1000px;
+  opacity: 1;
+  transition: max-height 0.5s ease-in-out, opacity 0.4s 0.5s ease-in-out,
+    scale 0.4s 0.5s ease-in-out;
+}
+
+.post-exit {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.post-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s 0.5s ease-in-out, opacity 0.4s ease-in-out;
+}
