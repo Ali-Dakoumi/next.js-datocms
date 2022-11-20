@@ -15,6 +15,7 @@ export default function Tags({ tags, tagId }) {
       {tags.allTags.map((tag) => {
         return (
           <button
+            key={tag.id}
             value={tag.id}
             onClick={(e) => {
               setTagId(e.target.value);
