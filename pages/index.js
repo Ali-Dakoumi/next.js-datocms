@@ -1,15 +1,9 @@
 import Head from "next/head";
 import { request } from "../lib/datocms";
-import { Image, useQuerySubscription } from "react-datocms";
-import TimeAgo from "react-timeago";
-import ReactMarkdown from "react-markdown";
+import { useQuerySubscription } from "react-datocms";
 import { query, tweetsQuery, tagsQuery, searchByTag } from "../lib/query";
 import { useEffect } from "react";
 import { useState } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import slugify from "slugify-arabic";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useRef } from "react";
 import Posts from "../components/posts";
 import Tweets from "../components/tweets";

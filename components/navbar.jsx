@@ -6,9 +6,7 @@ export default function Navbar() {
       <li className="font-ilyas text-[3rem]">
         <Link href={"/"}>TATTICA</Link>
       </li>
-      <li>
-        <Link href={"/allposts"}></Link>
-      </li>
+      <li>{/* <Link href={"/allposts"}></Link> */}</li>
     </ul>
   );
 }
