@@ -14,6 +14,11 @@
   @apply no-underline;
 }
 
+@font-face {
+  font-family: "ilyas";
+  src: url("../fonts/ilyas.otf");
+}
+
 .post-enter {
   max-height: 0;
   opacity: 0;
@@ -37,4 +42,45 @@
   max-height: 0;
   opacity: 0;
   transition: max-height 0.5s 0.5s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.tweet-enter {
+  max-height: 0;
+  opacity: 0;
+  scale: 0.5;
+}
+
+.tweet-enter-active {
+  scale: 1;
+  max-height: 1000px;
+  opacity: 1;
+  transition: max-height 0.5s ease-in-out, opacity 0.4s 0.5s ease-in-out,
+    scale 0.4s 0.5s ease-in-out;
+}
+
+.tweet-exit {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.tweet-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s 0.5s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.container {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.gradient-bg {
+  background-image: linear-gradient(to top, rgb(0 0 0), rgba(255, 255, 255, 0));
+}
+
+img {
+  object-fit: cover;
+}
+
+p {
+  direction: rtl;
 }

@@ -3,80 +3,58 @@ import { request } from "../lib/datocms";
 import { Image, useQuerySubscription } from "react-datocms";
 import TimeAgo from "react-timeago";
 import ReactMarkdown from "react-markdown";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { query } from "../lib/query";
-import algoliasearch from "algoliasearch";
+import { query, tweetsQuery, tagsQuery, searchByTag } from "../lib/query";
 import { useEffect } from "react";
+import { useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import slugify from "slugify-arabic";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { useRef } from "react";
+import Posts from "../components/posts";
+import Tweets from "../components/tweets";
+import Tags from "../components/tags";
 
-export async function getServerSideProps() {
-  const graphqlRequest = {
-    query: query,
-    variables: { limit: 10 },
-  };
-
-  return {
-    props: {
-      subscription: {
-        ...graphqlRequest,
-        initialData: await request(graphqlRequest),
-        token: process.env.NEXT_PUBLIC_DATOCMS_API_TOKEN,
-      },
-    },
-  };
-}
-
-export default function Home({ subscription }) {
+export default function Home({ subscription, tweets, tags }) {
+  const nodeRef = useRef(null);
+  const nodeRefTwo = useRef(null);
   const { data, error, status } = useQuerySubscription(subscription);
-  console.log(data.posts);
+  const {
+    data: tweetsData,
+    error: tweetsError,
+    status: tweetsStatus,
+  } = useQuerySubscription(tweets);
+  const [tagId, setTagId] = useState("");
+  const [newTweets, setNewTweets] = useState(tweetsData);
+  const [renderedData, setRenderedData] = useState({});
+  // ! verify how many renders or api requests usequerysubscription is making
   useEffect(() => {
-    const algoliaClient = algoliasearch(
-      process.env.LYNDX84BEQ,
-      process.env.b57cea768c520ae138c65eb2c3bd1c7a
-    );
-    console.log(algoliaClient);
-    const algoliaResults = data.posts.map((post) => {
-      return {
-        objectID: post.id,
-        title: post.author.name,
-        content: post.content,
-      };
-    });
-    const toAlgolia = async () => {
-      try {
-        const algoliaIndex = algoliaClient.initIndex("articles");
-        const algoliObjectIds = await algoliaIndex
-          .saveObjects(algoliaResults)
-          .catch((err) => console.log(err));
-
-        if (algoliObjectIds) console.log("success");
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    toAlgolia();
+    setRenderedData(data);
   }, [data]);
 
+  const { data: postsBytagName } = useQuerySubscription({
+    query: searchByTag,
+    variables: { id: tagId },
+    token: process.env.NEXT_PUBLIC_DATOCMS_API_TOKEN,
+  });
+  useEffect(() => {
+    if (tagId != "") {
+      const newData = postsBytagName;
+      setRenderedData(newData);
+    } else {
+      setRenderedData(data);
+    }
+  }, [tagId, postsBytagName, data]);
+
   return (
-    <div className="text-gray-700 body-font py-12 bg-gray-100 px-10">
+    <div className="text-textcolor body-font py-12 bg-background px-10">
       <Head>
+        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="max-w-screen-sm mx-auto text-center">
-        <p className="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">
-          Real-times Updates Demo
-        </p>
-        <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-5xl sm:leading-10">
-          Event Coverage LiveBlog
-        </h3>
-        <p className="mt-4 max-w-xl text-xl leading-7 text-gray-500 lg:mx-auto">
-          A simple Next.js + Typescript + Tailwind project to demonstrate
-          real-time capabilities of DatoCMS
-        </p>
-      </div>
-
-      <div className="max-w-screen-sm mx-auto text-center mt-20 mb-12">
+      <div className="max-w-[90%] mx-auto text-center mt-20 mb-12">
         {status === "connecting" ? (
           <div>Connecting to DatoCMS...</div>
         ) : status === "connected" ? (
@@ -93,7 +71,7 @@ export default function Home({ subscription }) {
       </div>
 
       {error && (
-        <div className="max-w-screen-sm my-12 mx-auto">
+        <div className="max-w-[90%] my-12 mx-auto">
           <h1 className="title-font text-lg font-bold text-gray-900 mb-3">
             Error: {error.code}
           </h1>
@@ -106,56 +84,39 @@ export default function Home({ subscription }) {
         </div>
       )}
 
-      <div className="max-w-screen-sm mx-auto my-12">
-        {data && (
-          <TransitionGroup>
-            {data.posts.map((post) => (
-              <CSSTransition
-                key={post.id}
-                classNames={{
-                  enter: "post-enter",
-                  enterActive: "post-enter-active",
-                  exit: "post-exit",
-                  exitActive: "post-exit-active",
-                }}
-                timeout={{ enter: 1200, exit: 1200 }}
-              >
-                <div>
-                  <div className="shadow-xl rounded-lg overflow-hidden bg-white">
-                    {post.photos.map((photo) => (
-                      <Image
-                        key={photo.responsiveImage.src}
-                        className="w-full"
-                        data={photo.responsiveImage}
-                      />
-                    ))}
-                    {post.title && (
-                      <div className="p-4 md:p-8 md:text-xl content text-right">
-                        <ReactMarkdown children={post.title} />
-                      </div>
-                    )}
-                  </div>
-                  <div className="mt-4 grid grid-cols-2 text-xs md:text-sm text-gray-500 md:px-8 items-center pb-12">
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 relative">
-                        <Image
-                          className="rounded-full mr-2 shadow"
-                          layout="fill"
-                          data={post.author.avatar.responsiveImage}
-                        />
-                      </div>
-                      <div className="pl-2">{post.author.name}</div>
-                    </div>
-                    <div className="text-right">
-                      <TimeAgo date={post._firstPublishedAt} />
-                    </div>
-                  </div>
-                </div>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-        )}
-      </div>
+      <Tweets tweetsData={tweetsData} />
+      <Tags tags={tags} tagId={tagId} />
+      <Posts renderedData={renderedData} />
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const tags = await request({
+    query: tagsQuery,
+    variables: { limit: 10 },
+  });
+  const graphqlRequest = {
+    query: query,
+    variables: { limit: 10 },
+  };
+  const graphqlTweetRequest = {
+    query: tweetsQuery,
+    variables: { limit: 3 },
+  };
+  return {
+    props: {
+      subscription: {
+        ...graphqlRequest,
+        initialData: await request(graphqlRequest),
+        token: process.env.NEXT_PUBLIC_DATOCMS_API_TOKEN,
+      },
+      tweets: {
+        ...graphqlTweetRequest,
+        initialData: await request(graphqlTweetRequest),
+        token: process.env.NEXT_PUBLIC_DATOCMS_API_TOKEN,
+      },
+      tags,
+    },
+  };
 }
