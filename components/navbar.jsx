@@ -7,7 +7,7 @@ export default function Navbar() {
         <Link href={"/"}>TATTICA</Link>
       </li>
       <li>
-        <Link href={"/allposts"}>All Posts</Link>
+        <Link href={"/allposts"}></Link>
       </li>
     </ul>
   );
