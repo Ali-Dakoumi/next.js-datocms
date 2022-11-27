@@ -1,40 +1,23 @@
-import Head from "next/head";
-import { request } from "../lib/datocms";
-import { useQuerySubscription } from "react-datocms";
-import {
-  query,
-  tweetsQuery,
-  searchByTag,
-  searchByAuthor,
-  singlePost,
-  cardQuery,
-} from "../lib/query";
-import { useEffect, useState } from "react";
-import Posts from "../components/posts";
-import Tweets from "../components/tweets";
-import { useContext } from "react";
-import { AppContext } from "./_app";
-import Sidebar from "../components/sidebar";
-import Card from "../components/card";
-import { fetchFunction, fetchQuery } from "../lib/fetchFunction";
-import Content from "../components/content";
-import { useQuery } from "react-query";
-import { useMemo } from "react";
+import Head from 'next/head'
+import { request } from '../lib/datocms'
+import { useQuerySubscription } from 'react-datocms'
+import { useQuery } from 'react-query'
+import { query, tweetsQuery, cardQuery } from '../lib/query'
+import Tweets from '../components/tweets'
+import Card from '../components/card'
+import Content from '../components/content'
+import { fetchQuery } from '../lib/fetchFunction'
 
 export default function Home({ subscription, tweets }) {
   // console.log("parent re render");
-  const {
-    data: realTimePosts,
-    error,
-    status,
-  } = useQuerySubscription(subscription);
+  const { data: realTimePosts, error, status } = useQuerySubscription(subscription)
   const {
     data: tweetsData,
     error: tweetsError,
     status: tweetsStatus,
-  } = useQuerySubscription(tweets);
+  } = useQuerySubscription(tweets)
 
-  const { data: cardData } = useQuery("card", () => fetchQuery(cardQuery));
+  const { data: cardData } = useQuery('card', () => fetchQuery(cardQuery))
 
   // ! verify how many renders or api requests usequerysubscription is making
 
@@ -46,21 +29,18 @@ export default function Home({ subscription, tweets }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="max-w-[100%] mx-auto text-center mb-4">
-        {status === "connecting" ? (
+      <div className="max-w-[100%] mx-auto text-center mb-4 text-textwhite">
+        {status === 'connecting' ? (
           <div>Connecting to DatoCMS...</div>
-        ) : status === "connected" ? (
+        ) : status === 'connected' ? (
           <div className="flex flex-col md:flex-row items-center justify-center">
-            <span className="flex h-3 w-3 relative mb-3 md:mb-0 md:mr-2">
+            {status === 'connected' && <h2> You are online now</h2>}
+            {status === 'connecting' && <h2> Loading ...</h2>}
+            {error && <h2> Try again please ... </h2>}
+            <span className="flex h-3 w-3 relative mb-3 md:mb-0 mx-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
             </span>
-            <h2>
-              موقع رياضي مختص في تصحيح المفاهيم، تحليل المباريات و الحديث عن
-              التكتيك
-            </h2>
-            {status === "connecting" && <h2> Loading ...</h2>}
-            {error && <h2> Try again please ... </h2>}
           </div>
         ) : (
           <div>Connection closed</div>
@@ -69,9 +49,7 @@ export default function Home({ subscription, tweets }) {
 
       {error && (
         <div className="max-w-[100%] my-12 mx-auto">
-          <h1 className="title-font text-lg font-bold text-gray-900 mb-3">
-            Error: {error.code}
-          </h1>
+          <h1 className="title-font text-lg font-bold text-gray-900 mb-3">Error: {error.code}</h1>
           <div className="my-5">{error.message}</div>
           {error.response && (
             <pre className="bg-gray-100 p-5 mt-5 font-mono">
@@ -80,7 +58,7 @@ export default function Home({ subscription, tweets }) {
           )}
         </div>
       )}
-      <div className="grid grid-cols-[70%_30%] pt-8">
+      <div className="flex flex-col-reverse md:grid md:grid-cols-[70%_30%] pt-8">
         <Tweets tweetsData={tweetsData} />
         <Card data={cardData} error={error} status={status} />
       </div>
@@ -88,18 +66,18 @@ export default function Home({ subscription, tweets }) {
         <Content realTimePosts={realTimePosts} />
       </div>
     </div>
-  );
+  )
 }
 
 export async function getServerSideProps() {
   const graphqlRequest = {
     query: query,
     variables: { limit: 10 },
-  };
+  }
   const graphqlTweetRequest = {
     query: tweetsQuery,
     variables: { limit: 3 },
-  };
+  }
   return {
     props: {
       subscription: {
@@ -113,5 +91,5 @@ export async function getServerSideProps() {
         token: process.env.NEXT_PUBLIC_DATOCMS_API_TOKEN,
       },
     },
-  };
+  }
 }

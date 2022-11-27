@@ -27,8 +27,8 @@
 }
 
 @font-face {
-  font-family: "ilyas";
-  src: url("../fonts/ilyas.otf");
+  font-family: 'ilyas';
+  src: url('../fonts/ilyas.otf');
 }
 
 .post-enter {
@@ -117,4 +117,16 @@ input:focus {
 
 .img-post > div {
   max-width: 100% !important;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+.authors {
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+.authors-sm {
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }

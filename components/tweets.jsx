@@ -1,22 +1,15 @@
-import TimeAgo from "react-timeago";
-import ReactMarkdown from "react-markdown";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  container,
-  itemVariants,
-  tweetsContainer,
-  tweetsVariants,
-} from "../lib/animations";
+import TimeAgo from 'react-timeago'
+import ReactMarkdown from 'react-markdown'
+import { AnimatePresence, motion } from 'framer-motion'
+import { tweetsContainer, tweetsVariants } from '../lib/animations'
 
 export default function Tweets({ tweetsData }) {
-  console.log("tweets rendered again ");
+  console.log('tweets rendered again ')
   return (
     <div className="max-w-full mb-2 overflow-hidden h-auto mr-8">
       <AnimatePresence>
         <motion.div
-          className={
-            "max-w-full overflow-hidden h-full grid grid-cols-1 grid-rows-3 items-stretch"
-          }
+          className={'max-w-full overflow-hidden h-full grid grid-cols-1 grid-rows-3 items-stretch'}
           variants={tweetsContainer}
           initial="hidden"
           animate="show"
@@ -53,5 +46,5 @@ export default function Tweets({ tweetsData }) {
         </motion.div>
       </AnimatePresence>
     </div>
-  );
+  )
 }

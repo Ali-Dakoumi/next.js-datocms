@@ -1,12 +1,11 @@
-import React, { useMemo } from "react";
-import { Image } from "react-datocms";
+import { Image } from 'react-datocms'
 
 export default function Card({ data }) {
-  console.log(data);
+  console.log(data)
 
   return (
     <div>
-      <div className="relative w-full mb-2 h-auto">
+      <div className="relative hidden md:block w-full mb-2 h-auto">
         <div className="w-full h-full text-textcolor flex flex-col overflow-hidden rounded-lg">
           {data && (
             <Image
@@ -26,5 +25,5 @@ export default function Card({ data }) {
         )}
       </div>
     </div>
-  );
+  )
 }

@@ -1,39 +1,41 @@
-import React from "react";
-import { AiOutlineHome } from "react-icons/ai";
-import { HiOutlinePencilSquare } from "react-icons/hi2";
-import { GrArticle } from "react-icons/gr";
-import Tags from "../components/tags";
-import Link from "next/link";
-import Authors from "./authors";
+import { AiOutlineHome } from 'react-icons/ai'
+import { HiOutlinePencilSquare } from 'react-icons/hi2'
+import { GrArticle } from 'react-icons/gr'
+import Tags from '../components/tags'
+import Link from 'next/link'
+import Authors from './authors'
 export default function Sidebar() {
   return (
-    <div>
-      <div className=" text-textcolor flex flex-col m-4 xl:text-lg 2xl:text-lg">
-        <div className="flex justify-end items-center">
-          <Link href={"/"}>تاتيكا</Link>
+    <div className="flex flex-row-reverse md:flex-col justify-end">
+      <div className=" text-textcolor flex flex-col  xl:text-lg 2xl:text-lg">
+        <h2 className="pb-1 mb-2 bg-secondbackground text-textsecond w-full pr-4 text-right text-[0.85rem]">
+          خريطة الموقع
+        </h2>
+        <div className="px-4 flex justify-end items-center text-[0.85rem] md:text-[1rem]">
+          <Link href={'/'}>تاتيكا</Link>
           <AiOutlineHome className="ml-2" />
         </div>
-        <div className="flex justify-end items-center">
-          <Link href={"/tweets"}>التدوينات</Link>
+        <div className="px-4 flex justify-end items-center text-[0.85rem] md:text-[1rem]">
+          <Link href={'/tweets'}>التدوينات</Link>
           <HiOutlinePencilSquare className="ml-2" />
         </div>
-        <div className="flex justify-end items-center">
-          <Link href={"/posts"}>المقالات</Link>
+        <div className="px-4 flex  justify-end items-center text-[0.85rem] md:text-[1rem]">
+          <Link href={'/posts'}>المقالات</Link>
           <GrArticle className="article ml-2" />
         </div>
       </div>
-      <h2 className="pb-1 bg-secondbackground text-textsecond w-full pr-4 text-right text-[0.85rem]">
-        مواضيع
-      </h2>
-      <div className="text-textcolor flex flex-col m-4">
+      <div className="text-textcolor flex flex-col max-w-[30%] md:max-w-[100%]">
+        <h2 className="md:mt-2 pb-1 mb-2 bg-secondbackground text-textsecond w-full pr-4 text-right text-[0.85rem] ">
+          مواضيع
+        </h2>
         <Tags />
       </div>
-      <h2 className="pb-1 bg-secondbackground text-textsecond w-full pr-4 text-right text-[0.85rem]">
-        الكاتب
-      </h2>
-      <div className="text-textcolor flex flex-col m-4">
+      <div className="text-textcolor flex flex-col w-full">
+        <h2 className="md:mt-2 pb-1 mb-2 bg-secondbackground text-textsecond w-full pr-4 text-right text-[0.85rem]">
+          الكتاب
+        </h2>
         <Authors />
       </div>
     </div>
-  );
+  )
 }
