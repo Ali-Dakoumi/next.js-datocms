@@ -12,7 +12,7 @@ import { authorById, tagById } from '../lib/query'
 import { data } from 'autoprefixer'
 
 export default function Posts({ renderedData, error, status }) {
-  const { setSlug, tagId, authorId, slug } = useContext(AppContext)
+  const { setSlug, setTagId, setAuthorId, tagId, authorId, slug } = useContext(AppContext)
   const [authorName, setAuthorName] = useState('')
   const [tagName, setTagName] = useState('')
   const variable = { id: authorId }
@@ -40,17 +40,33 @@ export default function Posts({ renderedData, error, status }) {
 
   return (
     <div className="col-span-1 my-8 md:mx-8">
-      <div className="pb-2">
-        {status === 'connecting' && <h2> Loading ...</h2>}
-        {error && <h2> Try again please ... </h2>}
-        {tagId === '' && authorId === '' && slug === '' && (
-          <p className="text-sm md:text-xl"> جميع المقالات</p>
-        )}
-        {authorId !== '' && <p className="text-sm md:text-xl">مقالات {authorName} </p>}
-        {tagId !== '' && <p className="text-sm md:text-xl">المضوع: {tagName} </p>}
-        {renderedData?.data?.posts?.length === 0 && (
-          <p className="text-sm">لا يوجد مقالات، أعد الإختيار من فضلك ...</p>
-        )}
+      <div className="pb-2 flex justify-between items-center w-full">
+        <div>
+          {(authorId !== '' || tagId !== '' || slug !== '') && (
+            <button
+              onClick={() => {
+                setTagId('')
+                setAuthorId('')
+                setSlug('')
+              }}
+              className="py-1 px-2 md:ml-2 md:my-2 my-1  ml-1 shadow-md rounded-lg bg-secondbackground text-red-500 text-[0.6rem] md:text-[1rem]"
+            >
+              كل المقالات
+            </button>
+          )}
+        </div>
+        <div>
+          {status === 'connecting' && <h2> Loading ...</h2>}
+          {error && <h2> Try again please ... </h2>}
+          {tagId === '' && authorId === '' && slug === '' && (
+            <p className="text-sm md:text-xl"> جميع المقالات</p>
+          )}
+          {authorId !== '' && <p className="text-sm md:text-xl">مقالات {authorName} </p>}
+          {tagId !== '' && <p className="text-sm md:text-xl">المضوع: {tagName} </p>}
+          {renderedData?.data?.posts?.length === 0 && (
+            <p className="text-sm">لا يوجد مقالات، أعد الإختيار من فضلك ...</p>
+          )}
+        </div>
       </div>
       <AnimatePresence>
         <motion.div
@@ -80,7 +96,7 @@ export default function Posts({ renderedData, error, status }) {
                     ))}
                     <div className="text-[0.8rem] md:text-[3rem] z-10 pb-2 pt-4 w-full text-textwhite absolute bottom-0 right-0 gradient-bg">
                       {post.title && (
-                        <div className="text-[0.8rem] md:text-[2rem] p-2 title text-right">
+                        <div className="text-[0.8rem] md:text-[1rem] p-2 title text-right">
                           <ReactMarkdown children={post.title} />
                         </div>
                       )}
@@ -108,7 +124,7 @@ export default function Posts({ renderedData, error, status }) {
             ))}
           {renderedData?.data?.post && (
             <div className="mx-8 text-right ml-8">
-              <h1 className="text-[0.8rem] md:text-[2rem] mb-4">
+              <h1 className="text-[0.8rem] md:text-[1rem] mb-4">
                 {renderedData?.data?.post.title}
               </h1>
               <div className="img-post relative h-[35vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden">

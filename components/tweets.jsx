@@ -10,7 +10,7 @@ export default function Tweets({ tweetsData }) {
       <p className="text-sm md:text-xl mb-2"> آخر التدوينات</p>
       <AnimatePresence>
         <motion.div
-          className={'max-w-full overflow-hidden h-full grid grid-cols-1 items-stretch'}
+          className={'max-w-full h-full grid grid-cols-1 items-stretch'}
           variants={tweetsContainer}
           initial="hidden"
           animate="show"

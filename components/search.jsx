@@ -8,7 +8,7 @@ export default function Search() {
   console.log('search component')
   return (
     <form>
-      <div className="max-h-[2rem] flex items-center border-2 rounded-lg border-bordercolor bg-secondbackground text-textsecond overflow-hidden">
+      <div className="max-h-[2rem] max-w-[14rem] flex items-center border-2 rounded-lg border-bordercolor bg-secondbackground text-textsecond overflow-hidden">
         <InputText />
         <div className="p-2 text-textsecond cursor-pointer">
           <BsSearch onClick={() => console.log('text', inputRef.current?.value)} />
