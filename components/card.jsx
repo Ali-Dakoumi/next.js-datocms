@@ -1,4 +1,4 @@
-import { Image } from 'react-datocms'
+import Image from 'next/image'
 
 export default function Card({ data }) {
   console.log(data)
@@ -10,9 +10,9 @@ export default function Card({ data }) {
           {data && (
             <Image
               className="absolute w-full h-full "
-              data={data?.data?.card.image.responsiveImage}
-              lazyLoad={true}
-              usePlaceholder={false}
+              src={data?.data?.card.image.responsiveImage.src}
+              fill
+              alt="hero image"
             />
           )}
         </div>
