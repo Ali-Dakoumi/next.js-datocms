@@ -17,7 +17,7 @@ export default function Tags() {
           setAuthorId('')
           setSlug('')
         }}
-        className="py-1 px-2 md:ml-2 md:my-2 my-1  ml-1 shadow-md rounded-lg bg-secondbackground text-red-500"
+        className="py-1 px-2 md:ml-2 md:my-2 my-1  ml-1 shadow-md rounded-lg bg-secondbackground text-red-500 text-[0.6rem] md:text-[1rem]"
       >
         الكل
       </button>

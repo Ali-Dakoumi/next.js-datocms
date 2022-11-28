@@ -18,7 +18,7 @@ export default function Authors() {
   }, [data])
 
   return (
-    <div className="max-w-full text-right text-[0.5rem]  grid authors-sm sm:grid-cols-2 md:flex justify-end flex-col xl:text-lg 2xl:text-lg">
+    <div className="max-w-full text-right text-[0.5rem]  flex flex-row md:flex justify-end md:flex-col xl:text-lg 2xl:text-lg">
       {/* <button
         onClick={() => {
           setAuthorId('')
@@ -36,7 +36,7 @@ export default function Authors() {
             <div key={author.id} className={`self-end py-1 px-2 flex justify-end items-center `}>
               <div className="cursor-pointer flex flex-col text-[1rem] justify-start">
                 <button
-                  className="text-right text-[0.7rem] md:text-[1rem]"
+                  className="text-right text-[0.6rem] md:text-[1rem]"
                   value={author.id}
                   onClick={(e) => {
                     setAuthorId(e.target.value)
@@ -59,10 +59,10 @@ export default function Authors() {
                   محلل فني{' '}
                 </button>
               </div>
-              <div className="hidden sm:block h-[2.5rem] w-[2.5rem] md:w-[3.3rem] md:h-[3.3rem] relative ml-4 mt-1">
+              <div className="hidden sm:block h-[2.5rem] w-[2.5rem] md:w-[3rem] md:h-[3.3rem] relative ml-4 mr-2 mt-1">
                 {author.avatar && (
                   <Image
-                    className="rounded-full mr-2 shadow"
+                    className="rounded-full shadow"
                     layout="fill"
                     data={author.avatar.responsiveImage}
                   />

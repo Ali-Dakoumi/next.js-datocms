@@ -51,7 +51,7 @@ function Content({ realTimePosts, error, status }) {
       {status === 'connecting' && <h2> Loading ...</h2>}
       {error && <h2> Try again please ... </h2>}
       <Posts renderedData={renderedData} error={error} status={status} />
-      <aside className="my-8 col-span-1 rounded-lg border-2 border-bordercolor">
+      <aside className="mt-8 md:my-8 col-span-1 rounded-lg border-2 border-bordercolor">
         <Sidebar />
       </aside>
     </div>

@@ -29,7 +29,7 @@ export default function Home({ subscription, tweets }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="max-w-[100%] mx-auto text-center mb-4 text-textwhite">
+      {/* <div className="max-w-[100%] mx-auto text-center mb-4 text-textwhite">
         {status === 'connecting' ? (
           <div>Connecting to DatoCMS...</div>
         ) : status === 'connected' ? (
@@ -39,7 +39,7 @@ export default function Home({ subscription, tweets }) {
             )}
             {status === 'connecting' && <h2> Loading ...</h2>}
             {error && <h2> Try again please ... </h2>}
-            <span className="flex h-3 w-3 relative mb-3 md:mb-0 mx-2">
+            <span className="flex h-3 w-3 relative mt-2 mb-3 md:mb-0 mx-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
             </span>
@@ -47,7 +47,7 @@ export default function Home({ subscription, tweets }) {
         ) : (
           <div>Connection closed</div>
         )}
-      </div>
+      </div> */}
 
       {error && (
         <div className="max-w-[100%] my-12 mx-auto">

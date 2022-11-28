@@ -44,10 +44,10 @@ export default function Posts({ renderedData, error, status }) {
         {status === 'connecting' && <h2> Loading ...</h2>}
         {error && <h2> Try again please ... </h2>}
         {tagId === '' && authorId === '' && slug === '' && (
-          <p className="text-xl"> جميع المقالات</p>
+          <p className="text-sm md:text-xl"> جميع المقالات</p>
         )}
-        {authorId !== '' && <p className="text-xl">مقالات {authorName} </p>}
-        {tagId !== '' && <p className="text-xl">المضوع: {tagName} </p>}
+        {authorId !== '' && <p className="text-sm md:text-xl">مقالات {authorName} </p>}
+        {tagId !== '' && <p className="text-sm md:text-xl">المضوع: {tagName} </p>}
         {renderedData?.data?.posts?.length === 0 && (
           <p className="text-sm">لا يوجد مقالات، أعد الإختيار من فضلك ...</p>
         )}
@@ -78,7 +78,7 @@ export default function Posts({ renderedData, error, status }) {
                         usePlaceholder={false}
                       />
                     ))}
-                    <div className="text-[0.8rem] md:text-[3rem] z-10 pb-2 pt-4 w-full text-textcolor absolute bottom-0 right-0 gradient-bg">
+                    <div className="text-[0.8rem] md:text-[3rem] z-10 pb-2 pt-4 w-full text-textwhite absolute bottom-0 right-0 gradient-bg">
                       {post.title && (
                         <div className="text-[0.8rem] md:text-[2rem] p-2 title text-right">
                           <ReactMarkdown children={post.title} />
@@ -94,8 +94,10 @@ export default function Posts({ renderedData, error, status }) {
                         />
                       )}
                     </div> */}
-                        <div className="px-2 text-xs">{post.author.name}</div>
-                        <div className="px-2 text-right text-xs">
+                        <div className="px-2 text-[0.65rem] md:text-xs text-textcolor">
+                          {post.author.name}
+                        </div>
+                        <div className="px-2 text-right text-[0.65rem] md:text-xs text-textcolor">
                           <TimeAgo date={post._firstPublishedAt} />
                         </div>
                       </div>

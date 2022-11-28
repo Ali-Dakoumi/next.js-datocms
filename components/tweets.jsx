@@ -6,10 +6,11 @@ import { tweetsContainer, tweetsVariants } from '../lib/animations'
 export default function Tweets({ tweetsData }) {
   console.log('tweets rendered again ')
   return (
-    <div className="max-w-full mb-2 overflow-hidden h-auto md:mr-8">
+    <div className="max-w-full h-[90%] mb-2 md:mr-8">
+      <p className="text-sm md:text-xl mb-2"> آخر التدوينات</p>
       <AnimatePresence>
         <motion.div
-          className={'max-w-full overflow-hidden h-full grid grid-cols-1 grid-rows-3 items-stretch'}
+          className={'max-w-full overflow-hidden h-full grid grid-cols-1 items-stretch'}
           variants={tweetsContainer}
           initial="hidden"
           animate="show"

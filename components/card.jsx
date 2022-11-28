@@ -5,7 +5,7 @@ export default function Card({ data }) {
 
   return (
     <div>
-      <div className="relative hidden md:block w-full mb-2 h-auto">
+      <div className="relative hidden md:block w-full mb-2 h-full">
         <div className="w-full h-full text-textcolor flex flex-col overflow-hidden rounded-lg">
           {data && (
             <Image
