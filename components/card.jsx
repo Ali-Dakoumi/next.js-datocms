@@ -9,10 +9,11 @@ export default function Card({ data }) {
         <div className="w-full h-full text-textcolor flex flex-col overflow-hidden rounded-lg">
           {data && (
             <Image
-              className="absolute w-full h-full "
+              className="absolute w-full h-full rounded-lg"
               src={data?.data?.card.image.responsiveImage.src}
-              fill
               alt="hero image"
+              priority
+              fill
             />
           )}
         </div>
