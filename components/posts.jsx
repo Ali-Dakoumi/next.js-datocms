@@ -40,14 +40,18 @@ export default function Posts({ renderedData, error, status }) {
 
   return (
     <div className="col-span-1 my-8 md:mx-8">
-      {status === 'connecting' && <h2> Loading ...</h2>}
-      {error && <h2> Try again please ... </h2>}
-      {tagId === '' && authorId === '' && slug === '' && <p className="text-xl"> جميع المقالات</p>}
-      {authorId !== '' && <p className="text-xl">مقالات {authorName} </p>}
-      {tagId !== '' && <p className="text-xl">المضوع: {tagName} </p>}
-      {renderedData?.data?.posts?.length === 0 && (
-        <p className="text-sm">لا يوجد مقالات، أعد الإختيار من فضلك ...</p>
-      )}
+      <div className="pb-2">
+        {status === 'connecting' && <h2> Loading ...</h2>}
+        {error && <h2> Try again please ... </h2>}
+        {tagId === '' && authorId === '' && slug === '' && (
+          <p className="text-xl"> جميع المقالات</p>
+        )}
+        {authorId !== '' && <p className="text-xl">مقالات {authorName} </p>}
+        {tagId !== '' && <p className="text-xl">المضوع: {tagName} </p>}
+        {renderedData?.data?.posts?.length === 0 && (
+          <p className="text-sm">لا يوجد مقالات، أعد الإختيار من فضلك ...</p>
+        )}
+      </div>
       <AnimatePresence>
         <motion.div
           className=" max-w-[90vw] grid gap-4 container"
@@ -64,7 +68,7 @@ export default function Posts({ renderedData, error, status }) {
                     setSlug(post.title)
                   }}
                 >
-                  <div className="img-post relative h-[25vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden cursor-pointer">
+                  <div className="img-post relative h-[35vw] md:h-[25vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden cursor-pointer">
                     {post.photos.map((photo) => (
                       <Image
                         key={photo.responsiveImage.src}
@@ -74,9 +78,9 @@ export default function Posts({ renderedData, error, status }) {
                         usePlaceholder={false}
                       />
                     ))}
-                    <div className="z-10 pb-2 pt-4 w-full text-textcolor absolute bottom-0 right-0 gradient-bg">
+                    <div className="text-[0.8rem] md:text-[3rem] z-10 pb-2 pt-4 w-full text-textcolor absolute bottom-0 right-0 gradient-bg">
                       {post.title && (
-                        <div className="p-2 text-lg title text-right">
+                        <div className="text-[0.8rem] md:text-[2rem] p-2 title text-right">
                           <ReactMarkdown children={post.title} />
                         </div>
                       )}
@@ -102,7 +106,9 @@ export default function Posts({ renderedData, error, status }) {
             ))}
           {renderedData?.data?.post && (
             <div className="mx-8 text-right ml-8">
-              <h1 className="text-[2rem] mb-4">{renderedData?.data?.post.title} </h1>
+              <h1 className="text-[0.8rem] md:text-[2rem] mb-4">
+                {renderedData?.data?.post.title}
+              </h1>
               <div className="img-post relative h-[35vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden">
                 {renderedData?.data?.post.photos.map((photo) => (
                   <Image
@@ -117,7 +123,7 @@ export default function Posts({ renderedData, error, status }) {
 
               <div className="z-10 pb-2 pt-4 w-full text-textcolor">
                 {renderedData?.data?.post.content && (
-                  <div className="py-2 text-lg title text-right">
+                  <div className="par py-2 text-lg title text-right ">
                     <ReactMarkdown children={renderedData?.data?.post.content} />
                   </div>
                 )}

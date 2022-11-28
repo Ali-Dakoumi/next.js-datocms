@@ -34,7 +34,9 @@ export default function Home({ subscription, tweets }) {
           <div>Connecting to DatoCMS...</div>
         ) : status === 'connected' ? (
           <div className="flex flex-col md:flex-row items-center justify-center">
-            {status === 'connected' && <h2> You are online now</h2>}
+            {status === 'connected' && (
+              <h2>موقع رياضي مختص في تصحيح المفاهيم، تحليل المباريات و الحديث عن التكتيك</h2>
+            )}
             {status === 'connecting' && <h2> Loading ...</h2>}
             {error && <h2> Try again please ... </h2>}
             <span className="flex h-3 w-3 relative mb-3 md:mb-0 mx-2">

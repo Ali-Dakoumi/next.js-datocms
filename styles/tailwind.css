@@ -119,7 +119,7 @@ input:focus {
   max-width: 100% !important;
 }
 
-p {
+.par > p {
   margin-bottom: 1rem;
 }
 
