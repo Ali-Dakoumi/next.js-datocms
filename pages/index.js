@@ -7,7 +7,7 @@ import Tweets from '../components/tweets'
 import Card from '../components/card'
 import Content from '../components/content'
 import { fetchQuery } from '../lib/fetchFunction'
-
+import IndexHead from '../components/indexHead'
 export default function Home({ subscription, tweets }) {
   // console.log("parent re render");
   const { data: realTimePosts, error, status } = useQuerySubscription(subscription)
@@ -27,12 +27,7 @@ export default function Home({ subscription, tweets }) {
 
   return (
     <div className="text-textcolor body-font py-8 bg-background px-10">
-      <Head>
-        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <IndexHead />
       <div className="max-w-[100%] mx-auto text-center mb-4 text-textwhite">
         {/* {status === 'connecting' ? (
           <div>Connecting to DatoCMS...</div>
