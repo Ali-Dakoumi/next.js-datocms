@@ -23,7 +23,10 @@ export default function IndexHead() {
         content="https://www.datocms-assets.com/85796/1669712932-slide-16_9-2.svg"
       />
 
-      <meta property="twitter:card" content="summary_large_image" />
+      <meta
+        property="twitter:card"
+        content="https://www.datocms-assets.com/85796/1669712932-slide-16_9-2.svg"
+      />
       <meta property="twitter:url" content="https://next-js-datocms.vercel.app/" />
       <meta property="twitter:title" content="Tattica - تاتيكا" />
       <meta
