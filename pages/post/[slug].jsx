@@ -15,9 +15,10 @@ export default function Post({
   console.log(post)
   const metaTags = post.seo
   return (
-    <div className="grid grid-cols-[70%_30%] px-10">
+    <div className=" flex flex-col px-10">
+      {' '}
       <Head> {renderMetaTags(metaTags)} </Head>
-      <div className="mx-8 text-right my-8 ml-8">
+      <div className="md:mx-8 text-right my-8 ml-8">
         <h1 className="text-[2rem] my-4">{post.title} </h1>
         <div className="relative h-[25vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden">
           {post.photos.map((photo) => (
@@ -56,9 +57,9 @@ export default function Post({
           </div>
         </div>
       </div>
-      <aside className="my-8 col-span-1 rounded-lg border-2 border-bordercolor sticky top-0 ">
+      {/* <aside className="mt-8 md:my-8 col-span-1 rounded-lg border-2 border-bordercolor">
         <Sidebar />
-      </aside>
+      </aside> */}
     </div>
   )
 }
