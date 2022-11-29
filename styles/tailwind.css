@@ -26,11 +26,6 @@
   @apply no-underline;
 }
 
-@font-face {
-  font-family: 'ilyas';
-  src: url('../fonts/ilyas.otf');
-}
-
 .post-enter {
   max-height: 0;
   opacity: 0;

@@ -10,9 +10,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        ilyas: ['ilyas', 'cursive'],
-      },
       transparent: 'transparent',
       colors: {
         pureblack: '#100F10',
