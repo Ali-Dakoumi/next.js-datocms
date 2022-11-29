@@ -1,18 +1,22 @@
-import { allSlugs, singlePost } from "../../lib/query";
-import { fetchFunction } from "../../lib/fetchFunction";
-import ReactMarkdown from "react-markdown";
-import slugify from "slugify-arabic";
-import Sidebar from "../../components/sidebar";
-import { Image } from "react-datocms";
-import TimeAgo from "react-timeago";
+import { allSlugs, singlePost } from '../../lib/query'
+import { fetchFunction } from '../../lib/fetchFunction'
+import ReactMarkdown from 'react-markdown'
+import slugify from 'slugify-arabic'
+import Sidebar from '../../components/sidebar'
+import { Image, renderMetaTags } from 'react-datocms'
+import TimeAgo from 'react-timeago'
+import Head from 'next/head'
 
 export default function Post({
   post: {
     data: { post },
   },
 }) {
+  console.log(post)
+  const metaTags = post.seo
   return (
     <div className="grid grid-cols-[70%_30%] px-10">
+      <Head> {renderMetaTags(metaTags)} </Head>
       <div className="mx-8 text-right my-8 ml-8">
         <h1 className="text-[2rem] my-4">{post.title} </h1>
         <div className="relative h-[25vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden">
@@ -56,33 +60,33 @@ export default function Post({
         <Sidebar />
       </aside>
     </div>
-  );
+  )
 }
 
 export async function getStaticPaths({}) {
   const {
     data: { slugs },
-  } = await fetchFunction("", allSlugs);
+  } = await fetchFunction('', allSlugs)
   const paths = slugs.map((post) => ({
     params: {
       slug: slugify(post.title, {
         remove: /[$*_+~.()'"!\-:@]+/g,
       }).toString(),
     },
-  }));
-  console.log(paths);
+  }))
+  console.log(paths)
   return {
     paths,
-    fallback: "blocking",
-  };
+    fallback: 'blocking',
+  }
 }
 
 export async function getStaticProps({ params }) {
-  const mySlug = params.slug.split("-").join(" ");
-  const variable = { title: mySlug };
-  const post = await fetchFunction(variable, singlePost);
-  console.log(mySlug);
+  const mySlug = params.slug.split('-').join(' ')
+  const variable = { title: mySlug }
+  const post = await fetchFunction(variable, singlePost)
+  console.log(mySlug)
   return {
     props: { post: post },
-  };
+  }
 }

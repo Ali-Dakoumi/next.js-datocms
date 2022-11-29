@@ -17,7 +17,11 @@ export default function Home({ subscription, tweets }) {
     status: tweetsStatus,
   } = useQuerySubscription(tweets)
 
+  if (error || tweetsError) console.log(error, tweetsError)
+
   const { data: cardData } = useQuery('card', () => fetchQuery(cardQuery))
+
+  console.log(realTimePosts, 'rrrrrrrrrrrrr')
 
   // ! verify how many renders or api requests usequerysubscription is making
 
@@ -29,8 +33,8 @@ export default function Home({ subscription, tweets }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <div className="max-w-[100%] mx-auto text-center mb-4 text-textwhite">
-        {status === 'connecting' ? (
+      <div className="max-w-[100%] mx-auto text-center mb-4 text-textwhite">
+        {/* {status === 'connecting' ? (
           <div>Connecting to DatoCMS...</div>
         ) : status === 'connected' ? (
           <div className="flex flex-col md:flex-row items-center justify-center">
@@ -46,8 +50,8 @@ export default function Home({ subscription, tweets }) {
           </div>
         ) : (
           <div>Connection closed</div>
-        )}
-      </div> */}
+        )} */}
+      </div>
 
       {error && (
         <div className="max-w-[100%] my-12 mx-auto">
