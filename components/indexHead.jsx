@@ -18,7 +18,10 @@ export default function IndexHead() {
         property="og:description"
         content="موقع رياضي مختص في التكتيك و تصحيح المفاهيم - هنا تجد نخبة المحللين العرب"
       />
-      <meta property="og:image" content="/image.svg" />
+      <meta
+        property="og:image"
+        content="https://www.datocms-assets.com/85796/1669712932-slide-16_9-2.svg"
+      />
 
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content="https://next-js-datocms.vercel.app/" />
@@ -27,7 +30,10 @@ export default function IndexHead() {
         property="twitter:description"
         content="موقع رياضي مختص في التكتيك و تصحيح المفاهيم - هنا تجد نخبة المحللين العرب"
       />
-      <meta property="twitter:image" content="/image.svg" />
+      <meta
+        property="twitter:image"
+        content="https://www.datocms-assets.com/85796/1669712932-slide-16_9-2.svg"
+      />
       <title>Tattica</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
