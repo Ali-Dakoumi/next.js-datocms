@@ -20,7 +20,7 @@ export default function Post({
       <Head> {renderMetaTags(metaTags)} </Head>
       <div className="md:mx-8 text-right my-8 ml-8">
         <h1 className="text-[2rem] my-4">{post.title} </h1>
-        <div className="relative h-[25vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden">
+        <div className="relative h-[35vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden">
           {post.photos.map((photo) => (
             <Image
               key={photo.responsiveImage.src}
