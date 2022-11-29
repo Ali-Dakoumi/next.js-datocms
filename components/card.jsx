@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 export default function Card({ data }) {
-  console.log(data)
+  console.log(data?.data?.card.image)
 
   return (
     <div>
@@ -10,7 +10,7 @@ export default function Card({ data }) {
           {data && (
             <Image
               className="absolute w-full h-full rounded-lg"
-              src={data?.data?.card.image.responsiveImage.src}
+              src={data?.data?.card.image.webp}
               alt="hero image"
               priority
               fill
