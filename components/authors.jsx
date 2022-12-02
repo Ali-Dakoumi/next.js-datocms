@@ -3,14 +3,16 @@ import { Image } from 'react-datocms'
 import { useQuery } from 'react-query'
 import { fetchQuery } from '../lib/fetchFunction'
 import { allAuthors } from '../lib/query'
-import { AppContext } from './contextProvider'
+import { useSetTagId, useSetAuthorId, useSetSlug } from './store'
 
 export default function Authors() {
-  const { authorId, setAuthorId, setTagId, setSlug } = useContext(AppContext)
+  const setTagId = useSetTagId()
+  const setAuthorId = useSetAuthorId()
+  const setSlug = useSetSlug()
+
   const [authors, setAuthors] = useState(null)
 
   const { data, status, error } = useQuery('authors', () => fetchQuery(allAuthors))
-
   useEffect(() => {
     if (data) {
       setAuthors(data.data.allAuthors)

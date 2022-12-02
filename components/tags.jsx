@@ -1,13 +1,29 @@
-import { useContext } from 'react'
 import { tagsQuery } from '../lib/query'
-import { AppContext } from './contextProvider'
 import { fetchQuery } from '../lib/fetchFunction'
 import { useQuery } from 'react-query'
-
+import {
+  useTagId,
+  useText,
+  useAuthorId,
+  useSlug,
+  useRenderData,
+  useSearchVariable,
+  useSearchBool,
+  useSetTagId,
+  useSetText,
+  useSetAuthorId,
+  useSetSlug,
+  useSetRenderData,
+  useSetSearchVariable,
+  useSetSearchBool,
+} from './store'
 export default function Tags() {
-  const { tagId, setTagId, setAuthorId, setSlug } = useContext(AppContext)
+  const tagId = useTagId()
+  const setTagId = useSetTagId()
+  const setAuthorId = useSetAuthorId()
+  const setSlug = useSetSlug()
+
   const { data, status, error } = useQuery('tags', () => fetchQuery(tagsQuery))
-  // console.log(tagId);
 
   return (
     <div className="px-4 max-w-full text-right tag text-[0.75rem] flex justify-end flex-wrap xl:text-lg 2xl:text-lg">

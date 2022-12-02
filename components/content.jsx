@@ -1,14 +1,29 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { fetchFunction } from '../lib/fetchFunction'
 import { searchByAuthor, searchByTag, singlePost } from '../lib/query'
-import { AppContext } from './contextProvider'
 import Posts from './posts'
 import Sidebar from './sidebar'
-
+import {
+  useTagId,
+  useAuthorId,
+  useSlug,
+  useSetTagId,
+  useSetAuthorId,
+  useSetSlug,
+  useSetRenderedData,
+  useRenderedData,
+} from './store'
 function Content({ realTimePosts, error, status }) {
+  const tagId = useTagId()
+  const authorId = useAuthorId()
+  const slug = useSlug()
+  const setTagId = useSetTagId()
+  const setAuthorId = useSetAuthorId()
+  const setSlug = useSetSlug()
+  const setRenderedData = useSetRenderedData()
+  const renderedData = useRenderedData()
+
   console.log('content rendered')
-  const { tagId, authorId, setAuthorId, setTagId, slug, setSlug, renderedData, setRenderedData } =
-    useContext(AppContext)
 
   useEffect(() => {
     setRenderedData({ data: realTimePosts })

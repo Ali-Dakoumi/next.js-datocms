@@ -3,16 +3,24 @@ import TimeAgo from 'react-timeago'
 import ReactMarkdown from 'react-markdown'
 import { container, itemVariants } from '../lib/animations'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useContext } from 'react'
-import { AppContext } from './contextProvider'
 import { useState } from 'react'
 import { fetchFunction } from '../lib/fetchFunction'
 import { useEffect } from 'react'
 import { authorById, tagById } from '../lib/query'
 import { data } from 'autoprefixer'
+import Link from 'next/link'
+import slugify from 'slugify-arabic'
+import { useTagId, useAuthorId, useSlug, useSetTagId, useSetAuthorId, useSetSlug } from './store'
 
 export default function Posts({ renderedData, error, status }) {
-  const { setSlug, setTagId, setAuthorId, tagId, authorId, slug } = useContext(AppContext)
+  // const { setSlug, setTagId, setAuthorId, tagId, authorId, slug } = useContext(AppContext)
+  const tagId = useTagId()
+  const authorId = useAuthorId()
+  const slug = useSlug()
+  const setTagId = useSetTagId()
+  const setAuthorId = useSetAuthorId()
+  const setSlug = useSetSlug()
+
   const [authorName, setAuthorName] = useState('')
   const [tagName, setTagName] = useState('')
   const variable = { id: authorId }
@@ -22,7 +30,7 @@ export default function Posts({ renderedData, error, status }) {
       const fetchAuthor = async () => {
         const newData = await fetchFunction(variable, authorById)
         setAuthorName(newData.data.author.name)
-        console.log(newData.data.author.name)
+        // console.log(newData.data.author.name)
       }
       fetchAuthor()
     }
@@ -32,7 +40,7 @@ export default function Posts({ renderedData, error, status }) {
       const fetchTag = async () => {
         const newData = await fetchFunction(tagVariable, tagById)
         setTagName(newData.data.tag.tagname)
-        console.log(newData)
+        // console.log(newData)
       }
       fetchTag()
     }
@@ -78,11 +86,11 @@ export default function Posts({ renderedData, error, status }) {
         >
           {renderedData?.data?.posts?.length > 0 &&
             renderedData?.data?.posts?.map((post) => (
-              <motion.div className="item" key={post.id} variants={itemVariants}>
-                <div
-                  onClick={() => {
-                    setSlug(post.title)
-                  }}
+              <motion.article className="item" key={post.id} variants={itemVariants}>
+                <Link
+                  href={`/post/${slugify(post.title, {
+                    remove: /[$*_+~.()'"!\-:@]+/g,
+                  })}`}
                 >
                   <div className="img-post relative h-[35vw] md:h-[25vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden cursor-pointer">
                     {post.photos.map((photo) => (
@@ -119,11 +127,11 @@ export default function Posts({ renderedData, error, status }) {
                       </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                </Link>
+              </motion.article>
             ))}
           {renderedData?.data?.post && (
-            <div className="mx-8 text-right ml-8">
+            <article className="mx-8 text-right ml-8">
               <h1 className="text-[0.8rem] md:text-[1rem] mb-4">
                 {renderedData?.data?.post.title}
               </h1>
@@ -163,7 +171,7 @@ export default function Posts({ renderedData, error, status }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           )}
         </motion.div>
       </AnimatePresence>

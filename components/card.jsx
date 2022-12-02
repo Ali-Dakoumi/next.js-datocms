@@ -1,8 +1,6 @@
 import Image from 'next/image'
 
 export default function Card({ data }) {
-  console.log(data?.data?.card.image)
-
   return (
     <div>
       <div className="relative hidden md:block w-full mb-2 h-full">

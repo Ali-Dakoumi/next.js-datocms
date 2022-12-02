@@ -26,7 +26,8 @@
     "react-timeago": "^7.1.0",
     "react-transition-group": "^4.4.5",
     "remark-gfm": "^3.0.1",
-    "slugify-arabic": "^1.6.0"
+    "slugify-arabic": "^1.6.0",
+    "zustand": "^4.1.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

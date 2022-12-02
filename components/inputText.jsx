@@ -1,17 +1,21 @@
-import { useContext } from 'react'
-import { AppContext } from './contextProvider'
-
+import { useSearchVariable, useSetSearchVariable, useSetSearchBool } from './store'
 export default function InputText() {
-  const { inputRef } = useContext(AppContext)
-
+  const searchVariable = useSearchVariable()
+  const setSearchVariable = useSetSearchVariable()
+  const setSearchBool = useSetSearchBool()
   return (
     <>
       <input
-        ref={inputRef}
         type="text"
         placeholder="search..."
         className="bg-background text-textsecond p-2"
         name="search"
+        onChange={(e) => {
+          setSearchVariable(e.target.value)
+          setSearchBool(false)
+          // console.log(e.target.value)
+        }}
+        value={searchVariable}
       />
     </>
   )
