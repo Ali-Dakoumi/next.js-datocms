@@ -8,6 +8,8 @@ const useStore = create((set) => ({
   renderedData: {},
   searchVariable: '',
   searchBool: false,
+  cartCount: 0,
+  addToCart: () => set((state) => ({ cartCount: state.cartCount + 1 })),
   setTagId: (newTagID) => set(() => ({ tagId: newTagID })),
   setText: (text) => set(() => ({ text: text })),
   setAuthorId: (authorId) => set(() => ({ authorId: authorId })),
@@ -17,7 +19,6 @@ const useStore = create((set) => ({
   setSearchBool: (newBool) => set(() => ({ searchBool: newBool })),
 }))
 
-// export const useTagId = useStore((state) => state.tagId)
 export const useTagId = () => useStore((state) => state.tagId)
 export const useText = () => useStore((state) => state.text)
 export const useAuthorId = () => useStore((state) => state.authorId)
@@ -33,3 +34,5 @@ export const useSetSlug = () => useStore((state) => state.setSlug)
 export const useSetRenderedData = () => useStore((state) => state.setRenderedData)
 export const useSetSearchVariable = () => useStore((state) => state.setSearchVariable)
 export const useSetSearchBool = () => useStore((state) => state.setSearchBool)
+
+export default useStore

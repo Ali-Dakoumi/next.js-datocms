@@ -19,15 +19,15 @@ export default function Post({
     <div className=" flex flex-col px-10">
       <Head> {renderMetaTags(metaTags)} </Head>
       <div className="md:mx-8 text-right my-8 ml-8">
+        <div>
+          <Link
+            href={'/'}
+            className="py-1 px-2 md:ml-2 md:my-2 my-1  ml-1 shadow-md rounded-lg bg-secondbackground text-red-500 text-[0.6rem] md:text-[1rem]"
+          >
+            كل المقالات
+          </Link>
+        </div>
         <div className="w-full flex justify-between items-center">
-          <div>
-            <Link
-              href={'/'}
-              className="py-1 px-2 md:ml-2 md:my-2 my-1  ml-1 shadow-md rounded-lg bg-secondbackground text-red-500 text-[0.6rem] md:text-[1rem]"
-            >
-              كل المقالات
-            </Link>
-          </div>
           <h1 className="text-[2rem] my-4">{post.title} </h1>
         </div>
         <div className="relative h-[35vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden">

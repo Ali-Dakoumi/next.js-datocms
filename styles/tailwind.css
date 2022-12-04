@@ -113,8 +113,7 @@ input:focus {
 .img-post > div {
   max-width: 100% !important;
 }
-
-.par > p {
+p {
   margin-bottom: 1rem;
 }
 
