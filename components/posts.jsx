@@ -86,7 +86,19 @@ export default function Posts({ renderedData, error, status }) {
         >
           {renderedData?.data?.posts?.length > 0 &&
             renderedData?.data?.posts?.map((post) => (
-              <motion.article className="item" key={post.id} variants={itemVariants}>
+              <motion.article
+                className="item"
+                key={post.id}
+                variants={itemVariants}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                whileHover={{
+                  y: -10,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <Link
                   href={`/post/${slugify(post.title, {
                     remove: /[$*_+~.()'"!\-:@]+/g,

@@ -16,7 +16,7 @@ export default function Search() {
   if (router.pathname !== '/') return <div></div>
   return (
     <form onSubmit={handleSubmit}>
-      <div className="max-h-[2rem] max-w-[14rem] flex items-center border-2 rounded-lg border-bordercolor bg-secondbackground text-textsecond overflow-hidden">
+      <div className="max-h-[1.6rem] max-w-[15rem] flex items-center border-2 rounded-lg border-bordercolor bg-secondbackground text-textsecond overflow-hidden">
         <InputText />
         <button className="p-2 text-textsecond cursor-pointer" type="submit">
           <BsSearch />

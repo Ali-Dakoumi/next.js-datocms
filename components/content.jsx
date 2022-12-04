@@ -1,3 +1,4 @@
+import Router, { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { fetchFunction } from '../lib/fetchFunction'
 import { searchByAuthor, searchByTag, singlePost } from '../lib/query'
@@ -24,9 +25,11 @@ function Content({ realTimePosts, error, status }) {
   const renderedData = useRenderedData()
 
   console.log('content rendered')
-
+  const router = useRouter()
   useEffect(() => {
-    setRenderedData({ data: realTimePosts })
+    if (router.pathname === '/') {
+      setRenderedData({ data: realTimePosts })
+    }
     setTagId('')
     setAuthorId('')
     setSlug('')

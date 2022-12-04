@@ -7,8 +7,8 @@ export default function Navbar() {
   // const setSearchVariable = useSetSearchVariable()
   // const setSearchBool = useSetSearchBool()
   return (
-    <ul className="maw-w-full flex justify-between items-center w-full text-textwhite py-2">
-      <li className="mt-2 relative w-12 h-7 md:w-20 md:h-12 font-ilyas ml-2 text-[2rem] md:text-[3rem]">
+    <ul className="maw-w-full flex justify-between items-center w-full text-textwhite py-1">
+      <li className=" relative w-12 h-7 font-ilyas ml-2 text-[2rem] md:text-[3rem]">
         <Link
           href={'/'}
           // onClick={() => {

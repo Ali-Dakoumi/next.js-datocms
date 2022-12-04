@@ -58,10 +58,10 @@ export default function Home({ subscription, tweets }) {
   // ! verify how many renders or api requests usequerysubscription is making
 
   return (
-    <div className="text-textcolor body-font py-8 bg-background px-10">
+    <div className="text-textcolor body-font pb-8 pt-2 bg-background px-10">
       <IndexHead />
-      <div className="max-w-[100%] mx-auto text-center mb-4 text-textwhite">
-        {/* {status === 'connecting' ? (
+      {/* <div className="max-w-[100%] mx-auto text-center mb-4 text-textwhite">
+        {status === 'connecting' ? (
           <div>Connecting to DatoCMS...</div>
         ) : status === 'connected' ? (
           <div className="flex flex-col md:flex-row items-center justify-center">
@@ -77,8 +77,8 @@ export default function Home({ subscription, tweets }) {
           </div>
         ) : (
           <div>Connection closed</div>
-        )} */}
-      </div>
+        )}
+      </div> */}
 
       {error && (
         <div className="max-w-[100%] my-12 mx-auto">
@@ -93,7 +93,7 @@ export default function Home({ subscription, tweets }) {
       )}
       {searchVariable === '' && (
         <>
-          <div className="flex flex-col-reverse md:grid md:grid-cols-[70%_30%] pt-8">
+          <div className="flex flex-col-reverse md:grid md:grid-cols-[70%_30%] pt-2">
             <Tweets tweetsData={tweetsData} />
             <Card data={cardData} error={error} status={status} />
           </div>

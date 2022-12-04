@@ -20,7 +20,7 @@ export default function Authors() {
   }, [data])
 
   return (
-    <div className="max-w-full text-right text-[0.5rem]  flex flex-row md:flex justify-end md:flex-col xl:text-lg 2xl:text-lg">
+    <div className="max-w-full text-right text-[0.5rem]  flex flex-row md:flex justify-end md:flex-col xl:text-lg 2xl:text-lg pr-4">
       {/* <button
         onClick={() => {
           setAuthorId('')
@@ -35,7 +35,7 @@ export default function Authors() {
       {authors &&
         authors?.map((author) => {
           return (
-            <div key={author.id} className={`self-end py-1 px-2 flex justify-end items-center `}>
+            <div key={author.id} className={`self-end py-1 pl-2 flex justify-end items-center `}>
               <div className="cursor-pointer flex flex-col text-[1rem] justify-start">
                 <button
                   className="text-right text-[0.6rem] md:text-[1rem]"

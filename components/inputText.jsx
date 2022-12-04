@@ -7,8 +7,8 @@ export default function InputText() {
     <>
       <input
         type="text"
-        placeholder="search..."
-        className="bg-background text-textsecond p-2"
+        placeholder=" ...بحث"
+        className="bg-background text-textsecond text-xs p-2 text-right"
         name="search"
         onChange={(e) => {
           setSearchVariable(e.target.value)

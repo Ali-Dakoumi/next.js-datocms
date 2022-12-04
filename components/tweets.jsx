@@ -21,12 +21,12 @@ export default function Tweets({ tweetsData }) {
               <div>
                 <div className="shadow-xl rounded-lg overflow-hidden bg-secondbackground">
                   {tweet.content && (
-                    <div className="p-4 text-xs xl:text-lg 2xl:text-lg title text-right">
+                    <div className="p-4 text-xs title text-right">
                       <ReactMarkdown children={tweet.content} />
                     </div>
                   )}
                 </div>
-                <div className="mt-1 grid grid-cols-2 text-xs xl:text-base 2xl:text-base text-gray-500 px-2 items-center pb-1">
+                <div className="mt-1 grid grid-cols-2 text-xs  text-gray-500 px-2 items-center pb-1">
                   <div className="flex items-center">
                     {/* <div className="w-8 h-8 relative">
                       <Image
