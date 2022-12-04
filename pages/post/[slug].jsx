@@ -27,7 +27,7 @@ export default function Post({
             كل المقالات
           </Link>
         </div>
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-end items-center">
           <h1 className="text-[2rem] my-4">{post.title} </h1>
         </div>
         <div className="relative h-[35vw] text-[3rem] justify-between flex-col rounded-2xl overflow-hidden">
