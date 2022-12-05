@@ -6,31 +6,52 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { fetchFunction } from '../lib/fetchFunction'
 import { useEffect } from 'react'
-import { authorById, tagById } from '../lib/query'
+import { authorById, searchByAuthor, searchByTag, singlePost, tagById } from '../lib/query'
 import { data } from 'autoprefixer'
 import Link from 'next/link'
 import slugify from 'slugify-arabic'
-import { useTagId, useAuthorId, useSlug, useSetTagId, useSetAuthorId, useSetSlug } from './store'
+import {
+  useTagId,
+  useAuthorId,
+  useSlug,
+  useSetTagId,
+  useSetAuthorId,
+  useSetSlug,
+  useSetRenderedData,
+  useRenderedData,
+  useSearchBool,
+  useSearchVariable,
+} from './store'
 
-export default function Posts({ renderedData, error, status }) {
-  // const { setSlug, setTagId, setAuthorId, tagId, authorId, slug } = useContext(AppContext)
+export default function Posts({ realTimePosts, error, status }) {
+  const setRenderedData = useSetRenderedData()
+  const renderedData = useRenderedData()
   const tagId = useTagId()
   const authorId = useAuthorId()
   const slug = useSlug()
   const setTagId = useSetTagId()
   const setAuthorId = useSetAuthorId()
   const setSlug = useSetSlug()
+  const searchBool = useSearchBool()
+  const searchVariable = useSearchVariable()
 
   const [authorName, setAuthorName] = useState('')
   const [tagName, setTagName] = useState('')
   const variable = { id: authorId }
   const tagVariable = { id: tagId }
+
+  useEffect(() => {
+    setRenderedData({ data: realTimePosts })
+    setTagId('')
+    setAuthorId('')
+    setSlug('')
+  }, [])
+
   useEffect(() => {
     if (authorId !== '') {
       const fetchAuthor = async () => {
         const newData = await fetchFunction(variable, authorById)
         setAuthorName(newData.data.author.name)
-        // console.log(newData.data.author.name)
       }
       fetchAuthor()
     }
@@ -40,11 +61,47 @@ export default function Posts({ renderedData, error, status }) {
       const fetchTag = async () => {
         const newData = await fetchFunction(tagVariable, tagById)
         setTagName(newData.data.tag.tagname)
-        // console.log(newData)
       }
       fetchTag()
     }
   }, [authorId, tagId])
+
+  console.log('content rendered')
+
+  useEffect(() => {
+    if (slug != '') {
+      setTagId('')
+      setAuthorId('')
+      const variable = { title: slug }
+      const fetchData = async () => {
+        const newData = await fetchFunction(variable, singlePost)
+        setRenderedData(newData)
+      }
+      fetchData()
+    } else if (tagId != '' && authorId === '') {
+      const variable = { id: tagId }
+      const fetchData = async () => {
+        const newData = await fetchFunction(variable, searchByTag)
+        setRenderedData(newData)
+      }
+      fetchData()
+    } else if (authorId != '' && tagId === '') {
+      const variable = { id: authorId }
+      const fetchData = async () => {
+        const newData = await fetchFunction(variable, searchByAuthor)
+        setRenderedData(newData)
+      }
+      fetchData()
+    } else if (authorId === '' && tagId === '' && slug === '') {
+      setRenderedData({ data: realTimePosts })
+    }
+  }, [authorId, tagId, slug])
+
+  useEffect(() => {
+    if (searchVariable === '') {
+      setRenderedData({ data: realTimePosts })
+    }
+  }, [searchBool])
 
   return (
     <div className="col-span-1 my-8 md:mx-8">

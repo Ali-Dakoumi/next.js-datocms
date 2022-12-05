@@ -1,32 +1,14 @@
-import Head from 'next/head'
 import { request } from '../lib/datocms'
 import { useQuerySubscription } from 'react-datocms'
 import { useQuery } from 'react-query'
-import { query, tweetsQuery, cardQuery, searchPosts } from '../lib/query'
+import { query, tweetsQuery, cardQuery } from '../lib/query'
 import Tweets from '../components/tweets'
 import Card from '../components/card'
 import Content from '../components/content'
-import { fetchFunction, fetchQuery } from '../lib/fetchFunction'
+import { fetchQuery } from '../lib/fetchFunction'
 import IndexHead from '../components/indexHead'
-import { useEffect } from 'react'
-import Posts from '../components/posts'
-import {
-  useSearchVariable,
-  useSearchBool,
-  useSetSearchVariable,
-  useSetSearchBool,
-  useSetRenderedData,
-  useRenderedData,
-} from '../components/store'
 
 export default function Home({ subscription, tweets }) {
-  const searchVariable = useSearchVariable()
-  const searchBool = useSearchBool()
-  const setSearchVariable = useSetSearchVariable()
-  const setSearchBool = useSetSearchBool()
-  const setRenderedData = useSetRenderedData()
-  const renderedData = useRenderedData()
-  // console.log("parent re render");
   const { data: realTimePosts, error, status } = useQuerySubscription(subscription)
   const {
     data: tweetsData,
@@ -35,27 +17,7 @@ export default function Home({ subscription, tweets }) {
   } = useQuerySubscription(tweets)
 
   if (error || tweetsError) console.log(error, tweetsError)
-
   const { data: cardData } = useQuery('card', () => fetchQuery(cardQuery))
-
-  useEffect(() => {
-    setSearchBool(false)
-    setSearchVariable('')
-  }, [])
-
-  useEffect(() => {
-    if (searchVariable !== '' && searchBool === true) {
-      const fetchPosts = async () => {
-        const variable = { search: searchVariable }
-        const newData = await fetchFunction(variable, searchPosts)
-        setRenderedData(newData)
-        console.log(renderedData)
-      }
-      fetchPosts()
-    }
-  }, [searchBool])
-
-  // ! verify how many renders or api requests usequerysubscription is making
 
   return (
     <div className="text-textcolor body-font pb-8 pt-2 bg-background px-10">
@@ -91,18 +53,18 @@ export default function Home({ subscription, tweets }) {
           )}
         </div>
       )}
-      {searchVariable === '' && (
-        <>
-          <div className="flex flex-col-reverse md:grid md:grid-cols-[70%_30%] pt-2">
-            <Tweets tweetsData={tweetsData} />
-            <Card data={cardData} error={error} status={status} />
-          </div>
-          <div className="w-full">
-            <Content realTimePosts={realTimePosts} />
-          </div>
-        </>
-      )}
-      {searchBool && searchVariable !== '' && (
+      {/* {searchVariable === '' && ( */}
+      <>
+        <div className="flex flex-col-reverse md:grid md:grid-cols-[70%_30%] pt-2">
+          <Tweets tweetsData={tweetsData} />
+          <Card data={cardData} error={error} status={status} />
+        </div>
+        <div className="w-full">
+          <Content realTimePosts={realTimePosts} />
+        </div>
+      </>
+      {/* )} */}
+      {/* {searchBool && searchVariable !== '' && (
         <>
           <div className="w-full">
             <button
@@ -116,7 +78,7 @@ export default function Home({ subscription, tweets }) {
             <Posts renderedData={renderedData} />
           </div>
         </>
-      )}
+      )} */}
     </div>
   )
 }
