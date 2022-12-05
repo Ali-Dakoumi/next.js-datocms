@@ -127,7 +127,7 @@ export default function Posts({ realTimePosts, error, status }) {
             <p className="text-sm md:text-xl"> جميع المقالات</p>
           )}
           {authorId !== '' && <p className="text-sm md:text-xl">مقالات {authorName} </p>}
-          {tagId !== '' && <p className="text-sm md:text-xl">المضوع: {tagName} </p>}
+          {tagId !== '' && <p className="text-sm md:text-xl">الموضوع: {tagName} </p>}
           {renderedData?.data?.posts?.length === 0 && (
             <p className="text-sm">لا يوجد مقالات، أعد الإختيار من فضلك ...</p>
           )}
